@@ -1,18 +1,23 @@
 {
-    "name": "x3wil/czech-stemmer",
-    "description": "Port of stemmer for Czech language",
+    "name": "tvaliasek/czech-stemmer",
+    "description": "Fork of x3wils port of stemmer for Czech language for use as stemmer for TNTSearch",
     "license": "MIT",
-    "keywords": ["czech", "stemmer"],
+    "keywords": ["czech", "stemmer", "tntsearch"],
     "authors": [
         {
             "name": "Patrik Chotěnovský",
             "email": "chotenovsky.patrik@gmail.com"
+        },
+        {
+            "name": "Tomáš Valiašek",
+            "email": "tomas@valiasek.cz"
         }
     ],
     "autoload": {
-        "psr-4": {"x3wil\\": "src/"}
+        "psr-4": {"Tvaliasek\\Search\\": "Search/src/"}
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.1.0",
+        "teamtnt/tntsearch": ">=1.4.0"
     }
 }

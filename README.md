@@ -1,5 +1,7 @@
 # Czech stemmer
 
+This is fork of x3wil/czech-stemmer repo, class is modified for use with TNTSearch 
+
 Port of stemmer for Czech language.
 
 Original code is a Java class by [Jacques Savoy](http://members.unine.ch/jacques.savoy/clef/) released under BSD license.
@@ -10,20 +12,37 @@ Installation
 
 Install using [Composer](http://getcomposer.org/):
 
-    composer require 'x3wil/czech-stemmer'
+    composer require 'tvaliasek/czech-stemmer'
 
 Usage
 -----
+``` php
+use TeamTNT\TNTSearch\TNTSearch;
+
+$tnt = new TNTSearch;
+
+$tnt->loadConfig([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => 'dbname',
+    'username'  => 'user',
+    'password'  => 'pass',
+    'storage'   => '/var/www/tntsearch/examples/',
+    'stemmer'   => \Tvaliasek\Search\TNTCzechStemmer::class
+]);
+
+```
+
+Standalone usage
+----------------
 
 ``` php
-use x3wil\CzechStemmer;
+use tvaliasek\Search\CzechStemmer;
 
-$stemmer = new CzechStemmer();
-
-$stemmer->stemmLight('velkého');
+CzechStemmer::stemmLight('velkého');
 // velk
 
-$stemmer->stemmAgressive('velkého');
+CzechStemmer::stemmAgressive('velkého');
 // vel
 ```
 

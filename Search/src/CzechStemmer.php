@@ -1,33 +1,33 @@
 <?php declare(strict_types = 1);
 
-namespace x3wil;
+namespace Tvaliasek\Search;
 
 class CzechStemmer
 {
 
-    public function stemmLight(string $word): string
+    public static function stemmLight(string $word): string
     {
         $word = mb_strtolower($word);
-        $word = $this->removeCase($word);
-        $word = $this->removePossessives($word);
+        $word = self::removeCase($word);
+        $word = self::removePossessives($word);
 
         return $word;
     }
 
-    public function stemmAgressive(string $word): string
+    public static function stemmAgressive(string $word): string
     {
         $word = mb_strtolower($word);
-        $word = $this->removeCase($word);
-        $word = $this->removePossessives($word);
-        $word = $this->removeComparative($word);
-        $word = $this->removeDiminutive($word);
-        $word = $this->removeAugmentative($word);
-        $word = $this->removeDerivational($word);
+        $word = self::removeCase($word);
+        $word = self::removePossessives($word);
+        $word = self::removeComparative($word);
+        $word = self::removeDiminutive($word);
+        $word = self::removeAugmentative($word);
+        $word = self::removeDerivational($word);
 
         return $word;
     }
 
-    private function removeCase(string $word): string
+    protected static function removeCase(string $word): string
     {
         $length = mb_strlen($word);
 
@@ -39,7 +39,7 @@ class CzechStemmer
             if (mb_substr($word, -4) === 'ětem') {
                 $word = mb_substr($word, 0, -3);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
             if (mb_substr($word, -4) === 'atům') {
                 return mb_substr($word, 0, -4);
@@ -54,7 +54,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -2);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (
@@ -72,7 +72,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -2);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (
@@ -94,7 +94,7 @@ class CzechStemmer
             if (mb_substr($word, -2) === 'em') {
                 $word = mb_substr($word, 0, -1);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (
@@ -104,7 +104,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -2);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -2) === 'ům') {
@@ -129,14 +129,14 @@ class CzechStemmer
                 mb_substr($word, -1) === 'e'
                 || mb_substr($word, -1) === 'i'
             ) {
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
             if (
                 mb_substr($word, -1) === 'í'
                 || mb_substr($word, -1) === 'é'
                 || mb_substr($word, -1) === 'ě'
             ) {
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
             if (
                 mb_substr($word, -1) === 'u'
@@ -158,7 +158,7 @@ class CzechStemmer
         return $word;
     }
 
-    private function palatalise(string $word): string
+    protected static function palatalise(string $word): string
     {
         if (
             mb_substr($word, -2) === 'ci'
@@ -204,7 +204,7 @@ class CzechStemmer
         return mb_substr($word, 0, -1);
     }
 
-    private function removePossessives(string $word): string
+    protected static function removePossessives(string $word): string
     {
         if (mb_strlen($word) > 5) {
             if (mb_substr($word, -2) === 'ov') {
@@ -218,14 +218,14 @@ class CzechStemmer
             if (mb_substr($word, -2) === 'in') {
                 $word = mb_substr($word, 0, -1);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
         }
 
         return $word;
     }
 
-    private function removeDerivational(string $word)
+    protected static function removeDerivational(string $word)
     {
         $length = mb_strlen($word);
 
@@ -237,7 +237,7 @@ class CzechStemmer
             if (mb_substr($word, -5) === 'ionář') {
                 $word = mb_substr($word, 0, -4);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -5) === 'ovisk'
@@ -268,7 +268,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -3);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
         }
 
@@ -280,7 +280,7 @@ class CzechStemmer
             if (mb_substr($word, -3) === 'ěnk') {
                 $word = mb_substr($word, 0, -2);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -3) === 'ián'
@@ -292,7 +292,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -2);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -3) === 'och'
@@ -339,7 +339,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -1);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -2) === 'íř'
@@ -351,7 +351,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -1);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -2) === 'ob'
@@ -397,7 +397,7 @@ class CzechStemmer
         return $word;
     }
 
-    private function removeAugmentative(string $word)
+    protected static function removeAugmentative(string $word)
     {
         $length = mb_strlen($word);
 
@@ -408,7 +408,7 @@ class CzechStemmer
         if ($length > 5 && (mb_substr($word, -3) === 'izn' || mb_substr($word, -3) === 'isk')) {
             $word = mb_substr($word, 0, -2);
 
-            return $this->palatalise($word);
+            return self::palatalise($word);
         }
 
         if ($length > 4 && mb_substr($word, -2) === 'ák') {
@@ -418,7 +418,7 @@ class CzechStemmer
         return $word;
     }
 
-    private function removeDiminutive(string $word)
+    protected static function removeDiminutive(string $word)
     {
         $length = mb_strlen($word);
 
@@ -438,7 +438,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -3);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -4) === 'áček'
@@ -466,7 +466,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -3);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -3) === 'áčk'
@@ -496,7 +496,7 @@ class CzechStemmer
             ) {
                 $word = mb_substr($word, 0, -1);
 
-                return $this->palatalise($word);
+                return self::palatalise($word);
             }
 
             if (mb_substr($word, -2) === 'ák'
@@ -515,12 +515,12 @@ class CzechStemmer
         return $word;
     }
 
-    private function removeComparative(string $word)
+    protected static function removeComparative(string $word)
     {
         if (mb_strlen($word) > 5 && (mb_substr($word, -3) === 'ejš' || mb_substr($word, -3) === 'ějš')) {
             $word = mb_substr($word, 0, -2);
 
-            return $this->palatalise($word);
+            return self::palatalise($word);
         }
 
         return $word;
