@@ -1,5 +1,5 @@
 {
-    "name": "tvaliasek/czech-stemmer",
+    "name": "tvaliasek/tnt-czech-stemmer",
     "description": "Fork of x3wils port of stemmer for Czech language for use as stemmer for TNTSearch",
     "license": "MIT",
     "keywords": ["czech", "stemmer", "tntsearch"],
