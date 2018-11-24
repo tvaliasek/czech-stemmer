@@ -12,7 +12,7 @@ Installation
 
 Install using [Composer](http://getcomposer.org/):
 
-    composer require 'tvaliasek/czech-stemmer'
+    composer require 'tvaliasek/tnt-czech-stemmer'
 
 Usage
 -----
